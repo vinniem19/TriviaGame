@@ -1,53 +1,145 @@
 // Pseudocoding for Trivia Game
 
+// Possible variables:  q1-q5, correct and incorrect answers for each question,
+//                      timer, picture associated with correct ans., start button,
+//                      For End Display: correctCount, incorrectCount, unansweredCount,
+//                      StartOver button.
+var incorrectAnswers = [ ];
+var correctAnswerImages = [
+  "../images/BookofGospels.jpg",
+  "../images/priestChasuble.jpeg",
+  "../images/pentecostSunday.jpg",
+  "../images/saintAnthony.jpg"
+]
+
+console.log(correctAnswerImages[0]);
+// var timer = 30;
+var correctCount=0;
+var incorrectCount=0;
+var unansweredCount=0;
 // 1. In this trivia game, we have to press start to load.
+var startButton = "<button>Start Game</button>";
+$(".start-button").append(startButton);
+
 
 // 2. First, the player is shown a question with 4 possible answers below.
 
-var questions = 
+var questionOne = 
       
         {
           q1: "What is the name of the book the priest reads the Gospel from?",
           a1: "Book of Gospels"
         }
     
-    console.log(questions["q1"]);
-    console.log(questions["a1"]);      
+    console.log(questionOne["q1"]);
+    console.log(questionOne["a1"]); 
+    
+var questionTwo =
+
+        {
+          q2: "What is the name of the large, colored vestment the priest wears during Mass?",
+          a2: "chasable"
+        }
+
+        console.log(questionTwo["q2"]);
+        console.log(questionTwo["a2"]);
+
+var questionThree =
+
+        {
+          q3: "How many days after Easter does Pentecost occur?",
+          a3: "50 days"
+        }
+
+var questionFour = 
+
+        {
+          q4: "Which Saint do we ask for help when we have lost something?",
+          a4: "Anthony"
+        }
+
+var questionFive =
+
+        {
+          q5: "Which prayer is not a part of the rosary?",
+          a5: "St Michael Prayer"
+        }
+
+        // $("#timer-area").hide();
+        
+        $("#question-asked").text(questionOne["q1"]);
+        $("#question-asked").hide();
      /*
         {
-          questionTwo: "What is the name of the large, colored vestment the priest wears during Mass?",
-          choicesTwo: ["chasable", "gown", "cloak", "white collar"],
+          questionTwo: "",
+          choicesTwo: ["", "gown", "cloak", "white collar"],
           answerTwo: 0
         },
       
         {
-          questionThree: "How many days after Easter does Pentecost occur",
-          choicesThree: ["100 days", "50 days", "40 days", "25 days"],
+          questionThree: "",
+          choicesThree: ["100 days", "", "40 days", "25 days"],
           answerThree: 1
         },
         
         {
-          questionFour: "Which Saint do we ask for help when we have lost something?",
-          choicesFour: ["Paul", "Anthony", "Luke", "Francis"],
+          questionFour: "",
+          choicesFour: ["Paul", "", "Luke", "Francis"],
           answerFour: 1
         },
 
         {
-            questionFive: "Which prayer is not a part of the rosary?",
-            choicesFive: ["Our Father", "Hail Mary", "Glory Be", "St Michael Prayer"],
+            questionFive: "",
+            choicesFive: ["Our Father", "Hail Mary", "Glory Be", ""],
             answerFive: 3
           }
           */
+// A function to start the game.
+          function startGame() {
+            timer = 30;
+          }
       
-      // This is a for loop for questions
-      /*
-      for ( var i = 0; i < questions.length; i++ ) {
-        var question = questions[i].question;
-        console.log(questions);
-        }
-        */
+      
 
 // 3. The timer starts its countdown for this question (roughly 30 sec.)
+/*
+         // This is one timer that worked
+
+function startTimer(duration, display) {
+  var timer = duration, seconds;
+  setInterval(function () {
+      
+      seconds = parseInt(timer % 60, 10);
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+
+      display.textContent = seconds;
+
+      if (--timer < 0) {
+          timer = duration;
+      }
+    }, 1000);
+}
+
+window.onload = function () {
+//this is where you can modifies the time amount.
+  var thirtySeconds = 30;
+      display = document.querySelector('#count-seconds');
+  startTimer(thirtySeconds, display);
+};
+*/
+window.onload = function () {
+function timer(){
+  var sec = 30;
+  var timer = setInterval(function(){
+      document.getElementById('count-seconds').innerHTML=' 00:'+sec;
+      sec--;
+      if (sec < 0) {
+          clearInterval(timer);
+      }
+  }, 1000);
+}
+timer();
+};
 //      --The timer resets to 30 sec for each question
 
 // 4. Each answer is clickable
@@ -69,10 +161,7 @@ var questions =
 //      --a start over button appears
 //      --after click, resets game to begin again
 
-// Possible variables:  q1-q5, correct and incorrect answers for each question,
-//                      timer, picture associated with correct ans., start button,
-//                      For End Display: correctCount, incorrectCount, unansweredCount,
-//                      StartOver button.
+
 
 
 
