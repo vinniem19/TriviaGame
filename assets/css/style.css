@@ -1,0 +1,18 @@
+.container {
+    height: 100%;
+    width: 100%;
+    background-image: url("../images/CatholicBasilica.jpg");
+}
+
+h1 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 48px;
+    text-decoration: underline;
+    color: silver;
+}
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 48px;
+    text-decoration: underline;
+    color: silver;
+}
