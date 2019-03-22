@@ -18,21 +18,32 @@ var correctCount=0;
 var incorrectCount=0;
 var unansweredCount=0;
 // 1. In this trivia game, we have to press start to load.
-var startButton = "<button>Start Game</button>";
+var startButton = document.createElement("button");
+var buttonText = document.createTextNode("Start Game");
+startButton.appendChild(buttonText);
 $(".start-button").append(startButton);
 
 
+
+
+
+function startGame() {
+  timer();
+  $("#answers-area").hide();
+  
+  $("#question-asked").show();
+}
 // 2. First, the player is shown a question with 4 possible answers below.
 
-var questionOne = 
+var quizQuestionsAnswers = 
       
         {
-          q1: "What is the name of the book the priest reads the Gospel from?",
-          a1: "Book of Gospels"
+          question : "What is the name of the book the priest reads the Gospel from?",
+          answer : "Book of Gospels"
         }
     
-    console.log(questionOne["q1"]);
-    console.log(questionOne["a1"]); 
+    console.log(quizQuestionsAnswers.question);
+    console.log(quizQuestionsAnswers.answer); 
     
 var questionTwo =
 
@@ -65,10 +76,15 @@ var questionFive =
           a5: "St Michael Prayer"
         }
 
-        // $("#timer-area").hide();
-        
-        $("#question-asked").text(questionOne["q1"]);
+        $("#timer-area").hide();
         $("#question-asked").hide();
+        $("#answers-area").hide();
+        $("#question-asked").html("<h3>" + quizQuestionsAnswers.question + "</h3>");
+        $("#answers-given").html("<h3>" + quizQuestionsAnswers.answer + "</h3");
+        $("#answers-area").on("click", function(){
+          console.log("good answer!");
+        });
+        //$("#question-asked").hide();
      /*
         {
           questionTwo: "",
@@ -95,9 +111,7 @@ var questionFive =
           }
           */
 // A function to start the game.
-          function startGame() {
-            timer = 30;
-          }
+
       
       
 
@@ -127,19 +141,20 @@ window.onload = function () {
   startTimer(thirtySeconds, display);
 };
 */
-window.onload = function () {
+
 function timer(){
   var sec = 30;
   var timer = setInterval(function(){
       document.getElementById('count-seconds').innerHTML=' 00:'+sec;
       sec--;
-      if (sec < 0) {
+      if (sec < 10) {
+        $("#count-seconds").html("00:0" + sec);
+      }
+      if (sec === 0) {
           clearInterval(timer);
       }
   }, 1000);
 }
-timer();
-};
 //      --The timer resets to 30 sec for each question
 
 // 4. Each answer is clickable
