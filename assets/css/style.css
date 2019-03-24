@@ -20,13 +20,6 @@ h1 {
     margin-bottom: 100px;
 }
 
-h3 {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 48px;
-    text-align: center;
-    color: black;
-}
-
 h2 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 48px;
@@ -37,6 +30,17 @@ h2 {
 }
 h2:hover {
     opacity: 0.5;
+}
+
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 48px;
+    text-align: center;
+    color: black;
+}
+
+h4 {
+    color: white;
 }
 
 button {
@@ -58,10 +62,17 @@ button {
     display: block;
 }
 
-#answers-given {
+#correct-ans-one {
     text-align: center;
+    display: block;
+}
+
+
+.card {
+    margin-left: 400px;
 }
 
 #question-area {
     margin-bottom: 50px;
+    background-color: tan;
 }

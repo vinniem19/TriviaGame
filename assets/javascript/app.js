@@ -4,7 +4,18 @@
 //                      timer, picture associated with correct ans., start button,
 //                      For End Display: correctCount, incorrectCount, unansweredCount,
 //                      StartOver button.
+// My variable for question one.
+var quizQuestionsAnswers = 
+      
+        {
+          question : "What is the name of the book the priest reads the Gospel from?",
+          answer : ["Book of Gospels", "Missal", "Hymnal", "Bulletin"]
+        }
+
+
 var incorrectAnswers = [ ];
+
+
 var correctAnswerImages = [
   "../images/BookofGospels.jpg",
   "../images/priestChasuble.jpeg",
@@ -20,10 +31,16 @@ var unansweredCount=0;
 
 // A function to start the game.
 function startGame() {
-  $("#question-asked").show();
+  $("#question-area").show();
   $("#answers-area").hide();
   
   }
+
+  $("#question-area").hide();
+  $("#correct-ans-one").hide();
+  $("#correct-ans-image-one").hide();
+        $("#answers-area").hide();
+        $("#question-area").html("<h3>" + quizQuestionsAnswers.question + "</h3>");
 
 // 1. In this trivia game, we have to press start to load.
 var startButton = document.createElement("h2");
@@ -32,10 +49,6 @@ startButton.append(buttonText);
 $(".start-button").append(startButton);
 $("#timer-area").hide();
 $(".start-button").on("click", 
-
-
-
-
 
 // My function to start the timer
 function timer(){
@@ -57,26 +70,54 @@ function timer(){
   $(".start-button").hide();
 
   // Here we show our 1st question and possible answers
-  $("#question-asked").show();
+  $("#question-area").show();
+
+  var correctAnsOne = quizQuestionsAnswers.answer[0];
+  $("#correct-ans-one").html("<h2>" + correctAnsOne + "</h2>");
+  $("#correct-ans-one").show();
+    
+  for (var i = 1; i < 4; i++) {
+  var divIncorrectAnsOne = $("<div>");
+  divIncorrectAnsOne.addClass("incorrect");
+    $("#answers-area").append(divIncorrectAnsOne);
+    divIncorrectAnsOne.html("<h2>" + quizQuestionsAnswers.answer[i] + "</h2>");
+  }
   $("#answers-area").show();
-  for (var i = 0; i < 4; i++) {
-  var divAnsOne = $("<div>");
-  $("#answers-area").append(divAnsOne);
-  divAnsOne.html("<h2>" + quizQuestionsAnswers.answer[i] + "</h2>");
+// If the correct answeer is clicked
+$("#correct-ans-one").on("click", function(){
+  correctCount++;
+  $("#answers-area").hide();
+  $("#correct-ans-one").hide();
+  $("#timer-area").hide();
+  $("#answers-area").html("<h4>Correct!</h4>");
+  $("#answers-area").show();
+  $("#correct-ans-image-one").show();
+  console.log("Correct: " + correctCount);
+});
+
+// If the incorrect answer is clicked
+  $(".incorrect").on("click", function(){
+    incorrectCount++;
+    $("#answers-area").html("<h4>Wrong Answer!</h4>");
+    $("#answers-area").show();
+    $("#correct-ans-one").hide();
+    $("#timer-area").hide();
+    $("#correct-ans-image-one").show();
+    console.log("incorrect: " + incorrectCount)
+  });
+
+  //$("#answers-given").html("<img> src = 'correctAnswerImages[0]'</img>");
+
+
   
-}
+
 });
 // 2. First, the player is shown a question with 4 possible answers below.
 
-var quizQuestionsAnswers = 
-      
-        {
-          question : "What is the name of the book the priest reads the Gospel from?",
-          answer : ["Book of Gospels", "Missal", "Hymnal", "Bulletin"]
-        }
+
     
     console.log(quizQuestionsAnswers.question);
-    console.log(quizQuestionsAnswers.answer); 
+     
     
 var questionTwo =
 
@@ -114,9 +155,7 @@ var questionFive =
         }
 
         
-        $("#question-asked").hide();
-        $("#answers-area").hide();
-        $("#question-asked").html("<h3>" + quizQuestionsAnswers.question + "</h3>");
+        
         
         
 
@@ -126,7 +165,7 @@ var questionFive =
 
 
 
-        //$("#question-asked").hide();
+        //$("#question-area").hide();
      /*
         {
           questionTwo: "",
