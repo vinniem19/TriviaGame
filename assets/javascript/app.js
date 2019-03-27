@@ -17,7 +17,7 @@ var quizQuestionsAnswers =
           "Which prayer is not a part of the rosary?"
         ],
           "answersOne" : ["Book of Gospels", "Missal", "Hymnal", "Bulletin"],
-          "answersTwo" : ["chasable", "gown", "cloak", "white collar"],
+          "answersTwo" : ["chasuble", "gown", "cloak", "white collar"],
           "answersThree" : ["50 days", "100 days", "40 days", "25 days"],
           "answersFour"  : ["Anthony", "Paul", "Luke", "Francis"],
           "answersFive"  : ["St Michael Prayer", "Our Father", "Hail Mary", "Glory Be"]
@@ -37,7 +37,7 @@ var incorrectCount=0;
 var unansweredCount=0;
 var sec=31;
 var intervalId;
-var clock;
+
 
 function decrement() {
   
@@ -51,9 +51,23 @@ function decrement() {
     $("#count-seconds").html("00:0" + sec);
   };
   if (sec === 0) {
-    clearInterval(intervalId);
+    
+    clearInterval(timer);
+    unansweredCount++;
+    console.log(unansweredCount);
+  
+    
+    $("#answers-area").html("<h4>Time is up!</h4>");
+    $("#answers-area").show();
+    $(".correct-ans").hide();
+    $("#timer-area").hide();
+    $("#correct-ans-image-one").show();
+    setTimeout(questionTwo, 3000);
+     // } else {
+       // setTimeout(questionThree, 3000)
   }
 }
+
 
 // My function to start the 30 sec timer for each question
 function timer(){
@@ -63,12 +77,13 @@ function timer(){
   intervalId = setInterval(decrement, 1000);
   }
 
+  // if the timer reaches 0
   // Where does this go?
         /*
     unansweredCount++;
     $("#answers-area").html("<h4>Time is up!</h4>");
     $("#answers-area").show();
-    $("#correct-ans-one").hide();
+    $(".correct-ans").hide();
     $("#timer-area").hide();
     clearInterval(timer);
     $("#correct-ans-image-one").show();
@@ -81,7 +96,7 @@ function timer(){
 // These need to stay hidden until start is pressed
 
   $("#question-area").hide();
-  $("#correct-ans-one").hide();
+  $(".correct-ans").hide();
   $("#correct-ans-image-one").hide();
   $("#correct-ans-image-two").hide();
   $("#correct-ans-image-three").hide();
@@ -102,15 +117,16 @@ $(".start-button").on("click", function() {
   // This hides the start button, because 
   // we shouldn't see it until game reset
   $(".start-button").hide();
-
+  
+  
   // Run the timer function
   timer();
 
 // 2. First, the player is shown a question with 4 possible answers below.
   $("#question-area").show();
   var correctAnsOne = quizQuestionsAnswers.answersOne[0];
-  $("#correct-ans-one").html("<h2>" + correctAnsOne + "</h2>");
-  $("#correct-ans-one").show();
+  $(".correct-ans").html("<h2>" + correctAnsOne + "</h2>");
+  $(".correct-ans").show();
     
   for (var i = 1; i < 4; i++) {
   var divIncorrectAnsOne = $("<div>");
@@ -121,16 +137,19 @@ $(".start-button").on("click", function() {
       }
   
 // If the correct answeer is clicked
-$("#correct-ans-one").on("click", function(){
+$(".correct-ans").on("click", function(){
+  correctCount++;
+  console.log("Correct: " + correctCount);
    $("#answers-area").hide();
-  $("#correct-ans-one").hide();
+  $(".correct-ans").hide();
   $("#timer-area").hide();
   $("#answers-area").html("<h4>Correct!</h4>");
   $("#answers-area").show();  
   $("#correct-ans-image-one").show();
+    $("#correct-ans-image-three").hide();
   clearInterval(timer);
   setTimeout(questionTwo, 3000);
-  console.log("Correct: " + correctCount);
+  
   });
   
   // If the incorrect answer is clicked
@@ -138,7 +157,7 @@ $("#correct-ans-one").on("click", function(){
     incorrectCount++;
     $("#answers-area").html("<h4>Wrong Answer!</h4>");
     $("#answers-area").show();
-    $("#correct-ans-one").hide();
+    $(".correct-ans").hide();
     $("#timer-area").hide();
     $("#correct-ans-image-one").show();
     clearInterval(timer);
@@ -146,6 +165,7 @@ $("#correct-ans-one").on("click", function(){
     console.log("incorrect: " + incorrectCount);
     
   });
+
 });
 
     // End of question 1
@@ -156,31 +176,20 @@ $("#correct-ans-one").on("click", function(){
       resetQuestion();
       timer();
   $("#question-area").hide();
-  $("#correct-ans-one").hide();
+  $(".correct-ans").hide();
   $("#correct-ans-image-one").hide();
+  $("#correct-ans-image-three").hide();
   $("#answers-area").hide();
   $("#question-area").html("<h3>" + quizQuestionsAnswers.question[1] + "</h3>");
   $("#timer-area").show();
-
-/*  
-    unansweredCount++;
-    $("#answers-area").html("<h4>Time is up!</h4>");
-    $("#answers-area").show();
-    $("#correct-ans-one").hide();
-    $("#timer-area").hide();
-    clearInterval(timer);
-    $("#correct-ans-image-two").show();
-    
-      }
-  }, 1000);
-};
-*/
+  
+ 
   // Here we show our 2nd question and possible answers
   $("#question-area").show();
 
   var correctAnsOne = quizQuestionsAnswers.answersTwo[0];
-  $("#correct-ans-one").html("<h2>" + correctAnsOne + "</h2>");
-  $("#correct-ans-one").show();
+  $("#correct-ans-two").html("<h2>" + correctAnsOne + "</h2>");
+  $("#correct-ans-two").show();
     
   for (var i = 1; i < 4; i++) {
   var divIncorrectAnsOne = $("<div>");
@@ -191,14 +200,14 @@ $("#correct-ans-one").on("click", function(){
       }
   
 // If the correct answeer is clicked
-$("#correct-ans-one").on("click", function(){
-  
+$("#correct-ans-two").on("click", function(){
   $("#answers-area").hide();
-  $("#correct-ans-one").hide();
+  $("#correct-ans-two").hide();
   $("#timer-area").hide();
   $("#answers-area").html("<h4>Correct!</h4>");
   $("#answers-area").show();
   $("#correct-ans-image-two").show();
+  clearInterval(timer);
   setTimeout(questionThree, 3000);
   console.log("Correct: " + correctCount);
 
@@ -209,10 +218,11 @@ $("#correct-ans-one").on("click", function(){
     incorrectCount++;
     $("#answers-area").html("<h4>Wrong Answer!</h4>");
     $("#answers-area").show();
-    $("#correct-ans-one").hide();
+    $("#correct-ans-two").hide();
     $("#timer-area").hide();
     $("#correct-ans-image-two").show();
     setTimeout(questionThree, 3000);
+    clearInterval(timer);
     console.log("incorrect: " + incorrectCount)
   });
 }
@@ -222,7 +232,8 @@ $("#correct-ans-one").on("click", function(){
 function questionThree() {
   resetQuestion();
       timer();
-  $("#correct-ans-one").hide();
+  $("#correct-ans-image-two").empty();    
+  $(".correct-ans").hide();
   $("#correct-ans-image-one").hide();
   $("#correct-ans-image-two").hide();
   $("#correct-ans-image-three").hide();
@@ -231,29 +242,54 @@ function questionThree() {
   $("#timer-area").show();
   $("#question-area").show();
 var correctAnsOne = quizQuestionsAnswers.answersThree[0];
-$("#correct-ans-one").html("<h2>" + correctAnsOne + "</h2>");
-$("#correct-ans-one").show();
-  
-for (var i = 1; i < 4; i++) {
-var divIncorrectAnsOne = $("<div>");
-divIncorrectAnsOne.addClass("incorrect");
-  $("#answers-area").append(divIncorrectAnsOne);
-  divIncorrectAnsOne.html("<h2>" + quizQuestionsAnswers.answersThree[i] + "</h2>");
-  $("#answers-area").show();
-    }
+$(".correct-ans").html("<h2>" + correctAnsOne + "</h2>");
+$(".correct-ans").show();
+// first incorrect ans for ques 3
+var incorrectAnsOne =  quizQuestionsAnswers.answersThree[1];
+var incorrectAnsOneDiv = $("<div>");
+incorrectAnsOneDiv.addClass("incorrect");
+incorrectAnsOneDiv.attr("id", "incorrect-ans-one")
+$("#answers-area").append(incorrectAnsOneDiv); 
+incorrectAnsOneDiv.html("<h2>" + incorrectAnsOne + "</h2>");
+    $("#answers-area").show();
+
+var incorrectAnsTwo =  quizQuestionsAnswers.answersThree[2];
+var incorrectAnsTwoDiv = $("<div>");
+incorrectAnsTwoDiv.addClass("incorrect");
+incorrectAnsTwoDiv.attr("id", "incorrect-ans-two");
+$(".correct-ans").prepend(incorrectAnsTwoDiv); 
+incorrectAnsTwoDiv.html("<h2>" + incorrectAnsTwo + "</h2>");
+
+
+var incorrectAnsThree =  quizQuestionsAnswers.answersThree[3];
+var incorrectAnsThreeDiv = $("<div>");
+incorrectAnsThreeDiv.addClass("incorrect");
+incorrectAnsThreeDiv.prepend(incorrectAnsThreeDiv); 
+incorrectAnsThreeDiv.html("<h2>" + incorrectAnsThree + "</h2>");
+//display the incorrect answers for ques 3
+$("#incorrect-ans-one").show();
+$("#incorrect-ans-two").show();
+//$("#incorrect-ans-three").show();
+//incorrectAnswersDiv.addClass("incorrect-ans");
+//incorrectAnswersDiv.attr("id", "incorrect-ans-one");
+//$("#incorrect-ans-one").html("<h2>" + incorrectAnsOne + "</h2>");
+//$("#incorrect-ans-one").show();
+console.log(incorrectAnsOne);
+console.log(incorrectAnsTwo);
+console.log(incorrectAnsThree);
 
 // If the correct answeer is clicked
-$("#correct-ans-one").on("click", function(){
-
-
-$("#correct-ans-two").hide();
-$("#timer-area").hide();
-$("#answers-area").html("<h4>Correct!</h4>");
-$("#answers-area").hide();
-$("#correct-ans-image-three").show();
-
-console.log("Correct: " + correctCount);
-
+$(".correct-ans").on("click", function(){
+  correctCount++;
+  $("#correct-ans-two").hide();
+  $("#timer-area").hide();
+  $("#answers-area").html("<h4>Correct!</h4>");
+  $("#answers-area").hide();
+  $("#correct-ans-image-three").show();
+  clearInterval(timer);
+  setTimeout(displayStats, 3000);
+  console.log("Correct: " + correctCount);
+    
 });
 
 // If the incorrect answer is clicked
@@ -261,60 +297,50 @@ $(".incorrect").on("click", function(){
   incorrectCount++;
   $("#answers-area").html("<h4>Wrong Answer!</h4>");
   $("#answers-area").show();
-  $("#correct-ans-one").hide();
+  $(".correct-ans").hide();
   $("#timer-area").hide();
-  $("#correct-ans-image-two").show();
-  
+  $("#correct-ans-image-three").show();
+  clearInterval(timer);
+  setTimeout(displayStats, 3000);
   console.log("incorrect: " + incorrectCount)
 });
 }
 
-// End Question 3
 
+// End Question 3
 
      // Function for resetting question
      function resetQuestion() {
        $("#answers-area").empty();
        $("#question-area").empty();
-       $("#correct-ans-one").empty();
+       $(".correct-ans").empty();
        $("#correct-ans-image-one").empty();
-            }
+       }
 
-
-// 3. The timer starts its countdown for this question (roughly 30 sec.)
-
-
-//      --The timer resets to 30 sec for each question
-
-// 4. Each answer is clickable
-
-// 5. Player chooses an answer and clicks, (we will probably need an on click function here)
-
-//      --answers become hidden/invisible/not shown
-//      --if the correct answer is chosen, Correct is displayed 
-//      --we also see a statement "The correct ans is:" as well as an animated pic (possibly Bootstrap card)
-//      --correct answer and pic are displayed 5-10 sec and move automatically to next question
-
-//      --if incorrect answer is chosen, Incorrect is displayed
-//      --same as correct answer chosen
-
-// 6. If timer reaches 0 before an answer is selected, same as incorrect answer chosen
 
 // 7. After all questions guessed, end game
 //      --we have a display of correct # / incorrect # / unanswered
 //      --a start over button appears
 //      --after click, resets game to begin again
 
-
-
-function displayStats() {
+  
+    
+  function displayStats() {
   $("#question-area").hide();
-  $("#correct-ans-one").hide();
-  $("#correct-ans-image-one").hide();
-        $("#answers-area").hide();
-  $("#stats-area").html("<h1>How you did:</h1>" + "<p>Correct: " + correctCount + "</p>" + "<p>Incorrect: " + incorrectCount + "</p>" + "<p>Unanswered: " + unansweredCount + "</p>");
+  $(".correct-ans").hide();
+  $("#timer-area").hide();
 
+  $("#count-seconds").hide();  
+  $("#correct-ans-two").hide();
+  $("#correct-ans-image-one").hide();
+  $("#correct-ans-image-two").hide();
+  $("#correct-ans-image-three").hide();
+  $("#answers-area").html("<h1>How you did:</h1>");
+  $("#answers-area").show();
+  $("#stats-area").text("Correct: " + correctCount + "  Incorrect: " + incorrectCount + "  Unanswered: " + unansweredCount);
   $("#stats-area").show();
+  clearInterval(timer);
+  clearInterval(intervalId);
 }
 
 
