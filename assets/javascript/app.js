@@ -1,3 +1,6 @@
+
+//@ts-check 
+
 // Pseudocoding for Trivia Game
 
 // Possible variables:  q1-q5, correct and incorrect answers for each question,
@@ -24,18 +27,18 @@ var quizQuestionsAnswers =
         }
 
 var correctAnswerImages = [
-  "../images/BookofGospels.jpg",
-  "../images/priestChasuble.jpeg",
-  "../images/pentecostSunday.jpg",
-  "../images/saintAnthony.jpg"
+              "../images/BookofGospels.jpg",
+              "../images/priestChasuble.jpeg",
+              "../images/pentecostSunday.jpg",
+              "../images/saintAnthony.jpg"
 ]
 
 console.log(correctAnswerImages[0]);
 // var timer = 30;
-var correctCount=0;
-var incorrectCount=0;
-var unansweredCount=0;
-var sec=31;
+var correctCount = 0;
+var incorrectCount = 0;
+var unansweredCount = 0;
+var sec = 31;
 var intervalId;
 
 
@@ -251,7 +254,7 @@ incorrectAnsOneDiv.addClass("incorrect");
 incorrectAnsOneDiv.attr("id", "incorrect-ans-one")
 $("#answers-area").append(incorrectAnsOneDiv); 
 incorrectAnsOneDiv.html("<h2>" + incorrectAnsOne + "</h2>");
-    $("#answers-area").show();
+    
 
 var incorrectAnsTwo =  quizQuestionsAnswers.answersThree[2];
 var incorrectAnsTwoDiv = $("<div>");
@@ -264,12 +267,15 @@ incorrectAnsTwoDiv.html("<h2>" + incorrectAnsTwo + "</h2>");
 var incorrectAnsThree =  quizQuestionsAnswers.answersThree[3];
 var incorrectAnsThreeDiv = $("<div>");
 incorrectAnsThreeDiv.addClass("incorrect");
-incorrectAnsThreeDiv.prepend(incorrectAnsThreeDiv); 
+incorrectAnsTwoDiv.attr("id", "incorrect-ans-three");
+$("#answer-area").append(incorrectAnsThreeDiv); 
 incorrectAnsThreeDiv.html("<h2>" + incorrectAnsThree + "</h2>");
 //display the incorrect answers for ques 3
+$("#answers-area").show();
 $("#incorrect-ans-one").show();
 $("#incorrect-ans-two").show();
-//$("#incorrect-ans-three").show();
+$("#incorrect-ans-three").show();
+
 //incorrectAnswersDiv.addClass("incorrect-ans");
 //incorrectAnswersDiv.attr("id", "incorrect-ans-one");
 //$("#incorrect-ans-one").html("<h2>" + incorrectAnsOne + "</h2>");
