@@ -83,3 +83,16 @@ h4 {
 #stats-area {
     padding-bottom: 50px;
 }
+
+@media only screen and (max-width: 720px) {
+    body {
+        background-size: 75%;
+    }
+    #question-area {
+        margin-bottom: 10px;
+        background-color: lightgray;
+    }
+    .card {
+        margin-left: 5px;
+    }
+}
