@@ -2,6 +2,7 @@
 body {
     background: url("../images/CatholicBasilica.jpg");
     background-size: cover;
+    
 }
 
 .container {
@@ -63,6 +64,7 @@ h4 {
 #stats-area {
     color: white;
     font-size: 24px;
+    padding-bottom: 50px;
 }
 
 #correct-ans-two {
@@ -80,13 +82,11 @@ h4 {
     background-color: tan;
 }
 
-#stats-area {
-    padding-bottom: 50px;
-}
 
 @media only screen and (max-width: 720px) {
     body {
-        background-size: 75%;
+        background: url("../images/ResponsiveCatholicBasilica.jpg");
+        
     }
     #question-area {
         margin-bottom: 10px;
@@ -94,5 +94,11 @@ h4 {
     }
     .card {
         margin-left: 5px;
+        
+    }
+
+    .start-button{
+        display: block;
+        padding: 0 0 0 0;
     }
 }
