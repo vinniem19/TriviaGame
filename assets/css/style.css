@@ -12,6 +12,11 @@ body {
     
 }
 
+#score {
+    font-size: 36px;
+    color: gold;
+}
+
 h1 {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 64px;

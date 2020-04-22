@@ -34,14 +34,21 @@ var correctAnswerImages = [
 ]
 
 console.log(correctAnswerImages[0]);
-// var timer = 30;
+// these are my variables
 var correctCount = 0;
 var incorrectCount = 0;
 var unansweredCount = 0;
 var sec = 31;
 var intervalId;
+var score = 0;
+var highScore;
 
+function showScore() {
+  
+    $("#score").html("<p>score: " + score + "</p>");
+}
 
+showScore();
 function decrement() {
   
   sec--;
@@ -55,7 +62,7 @@ function decrement() {
   };
   if (sec === 0) {
     
-    clearInterval(timer);
+    //clearInterval(timer);
     unansweredCount++;
     console.log(unansweredCount);
   
@@ -142,6 +149,8 @@ $(".start-button").on("click", function() {
 // If the correct answeer is clicked
 $(".correct-ans").on("click", function(){
   correctCount++;
+  score += 5;
+  showScore();
   console.log("Correct: " + correctCount);
    $("#answers-area").hide();
   $(".correct-ans").hide();
@@ -150,7 +159,7 @@ $(".correct-ans").on("click", function(){
   $("#answers-area").show();  
   $("#correct-ans-image-one").show();
     $("#correct-ans-image-three").hide();
-  clearInterval(timer);
+  // clearInterval(timer);
   setTimeout(questionTwo, 3000);
   
   });
@@ -163,7 +172,7 @@ $(".correct-ans").on("click", function(){
     $(".correct-ans").hide();
     $("#timer-area").hide();
     $("#correct-ans-image-one").show();
-    clearInterval(timer);
+    // clearInterval(timer);
     setTimeout(questionTwo, 3000);
     console.log("incorrect: " + incorrectCount);
     
@@ -177,6 +186,7 @@ $(".correct-ans").on("click", function(){
 
     function questionTwo() {
       resetQuestion();
+      showScore();
       timer();
   $("#question-area").hide();
   $(".correct-ans").hide();
@@ -210,9 +220,11 @@ $("#correct-ans-two").on("click", function(){
   $("#answers-area").html("<h4>Correct!</h4>");
   $("#answers-area").show();
   $("#correct-ans-image-two").show();
-  clearInterval(timer);
+  // clearInterval(timer);
   setTimeout(questionThree, 3000);
   console.log("Correct: " + correctCount);
+  score += 5;
+  showScore();
 
 });
 
@@ -225,7 +237,7 @@ $("#correct-ans-two").on("click", function(){
     $("#timer-area").hide();
     $("#correct-ans-image-two").show();
     setTimeout(questionThree, 3000);
-    clearInterval(timer);
+    // clearInterval(timer);
     console.log("incorrect: " + incorrectCount)
   });
 }
@@ -292,7 +304,7 @@ $(".correct-ans").on("click", function(){
   $("#answers-area").html("<h4>Correct!</h4>");
   $("#answers-area").hide();
   $("#correct-ans-image-three").show();
-  clearInterval(timer);
+  // clearInterval(timer);
   setTimeout(displayStats, 3000);
   console.log("Correct: " + correctCount);
     
@@ -306,7 +318,7 @@ $(".incorrect").on("click", function(){
   $(".correct-ans").hide();
   $("#timer-area").hide();
   $("#correct-ans-image-three").show();
-  clearInterval(timer);
+  // clearInterval(timer);
   setTimeout(displayStats, 3000);
   console.log("incorrect: " + incorrectCount)
 });
@@ -345,7 +357,7 @@ $(".incorrect").on("click", function(){
   $("#answers-area").show();
   $("#stats-area").text("Correct: " + correctCount + "  Incorrect: " + incorrectCount + "  Unanswered: " + unansweredCount);
   $("#stats-area").show();
-  clearInterval(timer);
+  // clearInterval(timer);
   clearInterval(intervalId);
 }
 
